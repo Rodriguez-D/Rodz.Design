@@ -1,0 +1,10 @@
+{
+  "description": "Showcases a UX designer, web designer, and illustrator's portfolio in Spanish, highlighting skills and projects to attract potential clients.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

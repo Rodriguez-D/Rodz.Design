@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@400;500;700;900&family=Fredoka:wght@600;700&family=Outfit:wght@400;500;600;700;800;900&family=M+PLUS+1p:wght@900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #FAF9F2;
+  --color-fg: #131816;
+  --color-accent: #EEBBAA;
+  --color-divider: #164427;
+  --font-nunito: 'Nunito', sans-serif;
+  --font-fredoka: 'Fredoka', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-mplus: 'M PLUS 1p', sans-serif;
+  --font-fraunces: 'Fraunces', serif;
+}
+
+body {
+  background-color: #E1E0DA;
+  color: #131816;
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url('/paper-texture2.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #EEBBAA transparent;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-inner {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+}
+
+.fade-section {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Nav hand-drawn hover underline ────────────────────────────────────────── */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #131816;
+  transition: color 0.2s ease;
+  padding-bottom: 3px;
+  box-shadow: none;
+}
+
+.nav-link:hover {
+  color: #164427;
+}
+
+/* Wavy "hand-drawn" underline via text-decoration */
+.nav-link:hover,
+.nav-link-active {
+  text-decoration: underline wavy #EDA73F;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+.nav-link-active {
+  font-size: 1.15em;
+  text-decoration-color: #EDA73F;
+}
+
+/* ── Masonry gallery ────────────────────────────────────────────────────────── */
+.masonry-grid {
+  columns: 3;
+  column-gap: 6px;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* The wrapper IS the stacking/clip context */
+.masonry-img-wrap {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  background: #FAF9F2;  /* shows when image scales down */
+}
+
+.masonry-img-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Scale DOWN on hover — image shrinks, background reveals around it */
+.masonry-item:hover .masonry-img-wrap img {
+  transform: scale(0.86);
+}
+
+/* Vertical label — sits inside the wrapper, appears in the revealed left area */
+.masonry-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #131816;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.3s ease 0.15s;
+}
+
+.masonry-item:hover .masonry-label {
+  opacity: 1;
+}
+
+.masonry-label-sep {
+  margin: 0 6px;
+  opacity: 0.25;
+}
+
+@media (max-width: 1023px) {
+  .masonry-grid { columns: 2; }
+}
+
+@media (max-width: 639px) {
+  .masonry-grid { columns: 1; }
+}
+
+@keyframes text-sweep {
+  0%        { background-position: -70% 0, 0 0; }
+  40%, 100% { background-position: 170% 0, 0 0; }
+}
+
+.hero-glow {
+  background-image:
+    linear-gradient(90deg, transparent 0%, rgba(168, 219, 160, 0.55) 35%, #d4f2cd 50%, rgba(168, 219, 160, 0.55) 65%, transparent 100%),
+    linear-gradient(#164427, #164427);
+  background-size: 40% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: text-sweep 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.marquee-glass {
+  -webkit-text-stroke: 2px var(--c);
+  background-image: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--c) 20%, transparent) 0%,
+    color-mix(in srgb, var(--c) 6%, transparent) 55%,
+    color-mix(in srgb, var(--c) 13%, transparent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
